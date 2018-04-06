@@ -1,0 +1,55 @@
+
+@startuml
+
+class Sistema{
+
+  String nome
+  List<Entidade> entidades
+}
+
+class Entidade{
+
+  String nome;
+  List<Atributo> atributos
+}
+
+class Atributo{
+  String nome;
+  String tipo;
+  List<RegraAtributo> regras;
+}
+
+class RegraAtributo{
+  String nome;
+  String descricao;
+}
+
+class InstanciaSistema{
+
+  Sistema sistema;
+  List<InstanciaEntidade> entInstanciadas;
+}
+
+class InstanciaEntidade{
+
+  Entidade entidades
+  List<InstanciaAtributo> attInstanciados;
+}
+
+class InstanciaAtributo{
+
+    Atributo atributo;
+    Object valor;
+}
+
+Sistema *-- Entidade
+Entidade *-- Atributo
+Atributo *- RegraAtributo
+
+InstanciaSistema *- Sistema
+InstanciaSistema *-- InstanciaEntidade
+InstanciaEntidade *- Entidade
+InstanciaEntidade *-- InstanciaAtributo
+InstanciaAtributo *- Atributo
+
+@enduml
