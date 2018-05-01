@@ -1,16 +1,33 @@
-
 @startuml
-
 class Sistema{
 
   String nome
   List<Entidade> entidades
+  List<UsuariodoSistema> usuariodoSistema
 }
+class Usuario extends User {
 
+  List<Sistema> sistema
+}
+class User{
+  String nome
+  String login
+  String senha
+}
+class UsuariodoSistema extends User{
+
+  NivelDeAcesso niveldeacesso
+}
 class Entidade{
 
   String nome;
   List<Atributo> atributos
+}
+ Enum NivelDeAcesso{
+  ROOT("root")
+  ADMIN("admin")
+  USER("user")
+
 }
 
 class Atributo{
@@ -25,7 +42,6 @@ class RegraAtributo{
 }
 
 class InstanciaSistema{
-
   Sistema sistema;
   List<InstanciaEntidade> entInstanciadas;
 }
@@ -41,8 +57,10 @@ class InstanciaAtributo{
     Atributo atributo;
     Object valor;
 }
-
+Usuario *-- Sistema
+UsuariodoSistema *--NivelDeAcesso
 Sistema *-- Entidade
+UsuariodoSistema --* Sistema
 Entidade *-- Atributo
 Atributo *- RegraAtributo
 
