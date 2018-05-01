@@ -57,10 +57,11 @@ class InstanciaAtributo{
     Atributo atributo;
     Object valor;
 }
+UsuariodoSistema *-NivelDeAcesso
 Usuario *-- Sistema
-UsuariodoSistema *--NivelDeAcesso
+
 Sistema *-- Entidade
-UsuariodoSistema --* Sistema
+Sistema -* UsuariodoSistema
 Entidade *-- Atributo
 Atributo *- RegraAtributo
 
