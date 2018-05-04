@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +27,6 @@ public class InstaciaAtributo implements Serializable {
     private Long id;
     @ManyToOne
     private Atributo atributo;
-
     private String valor;
 
     public Atributo getAtributo() {
