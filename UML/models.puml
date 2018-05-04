@@ -5,18 +5,18 @@ class Sistema{
   List<Entidade> entidades
   List<UsuariodoSistema> usuariodoSistema
 }
-class Usuario extends User {
-
-  List<Sistema> sistema
-}
-class User{
+class Usuario  {
   String nome
   String login
   String senha
+  List<Sistema> sistema
 }
-class UsuariodoSistema extends User{
 
+class UsuariodoSistema{
+  Long id
+  List<Atributo> atributo
   NivelDeAcesso niveldeacesso
+
 }
 class Entidade{
 
@@ -57,11 +57,11 @@ class InstanciaAtributo{
     Atributo atributo;
     Object valor;
 }
-UsuariodoSistema *-NivelDeAcesso
 Usuario *-- Sistema
-
+UsuariodoSistema *-NivelDeAcesso
+UsuariodoSistema *--Atributo
 Sistema *-- Entidade
-Sistema -* UsuariodoSistema
+Sistema *- UsuariodoSistema
 Entidade *-- Atributo
 Atributo *- RegraAtributo
 
