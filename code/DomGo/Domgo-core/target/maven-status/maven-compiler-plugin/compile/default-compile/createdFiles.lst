@@ -1,8 +1,12 @@
 com/unity/domgo/model/Atributo.class
-com/unity/domgo/model/RegraAtributo.class
-com/unity/domgo/model/InstaciaEntidade.class
-com/unity/domgo/model/InstanciaSistema.class
+com/unity/domgo/model/UsuariosSistema.class
 com/unity/domgo/app/GeraTabelas.class
 com/unity/domgo/model/Sistema.class
+com/unity/domgo/model/Usuario.class
 com/unity/domgo/model/InstaciaAtributo.class
+com/unity/domgo/model/RegraAtributo.class
+com/unity/domgo/model/User.class
+com/unity/domgo/model/InstaciaEntidade.class
+com/unity/domgo/model/InstanciaSistema.class
+com/unity/domgo/model/NivelDeAcesso.class
 com/unity/domgo/model/Entidade.class
