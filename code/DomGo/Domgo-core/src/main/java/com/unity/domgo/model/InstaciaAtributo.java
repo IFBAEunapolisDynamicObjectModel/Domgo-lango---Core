@@ -29,6 +29,14 @@ public class InstaciaAtributo implements Serializable {
     private Atributo atributo;
     private String valor;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Atributo getAtributo() {
         return atributo;
     }

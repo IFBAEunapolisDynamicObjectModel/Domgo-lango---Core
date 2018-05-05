@@ -5,8 +5,6 @@
  */
 package com.unity.domgo.model;
 
-import javax.persistence.Entity;
-
 /**
  *
  * @author user

@@ -36,6 +36,14 @@ public class InstaciaEntidade implements Serializable {
     @OneToMany
     private List<InstaciaAtributo> instaciaAtributo;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Entidade getEntidade() {
         return entidade;
     }
