@@ -211,6 +211,12 @@ public class AtributoBean implements Serializable {
 					builder.lower(root.<String> get("nome")),
 					'%' + nome.toLowerCase() + '%'));
 		}
+		String tipo = this.example.getTipo();
+		if (tipo != null && !"".equals(tipo)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("tipo")),
+					'%' + tipo.toLowerCase() + '%'));
+		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}

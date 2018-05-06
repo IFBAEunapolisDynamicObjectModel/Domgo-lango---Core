@@ -7,9 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToOne;
-import com.unity.domgocore.model.RegraAtributo;
 import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.ManyToMany;
@@ -29,8 +26,11 @@ public class Atributo implements Serializable {
 	@Column(nullable = false)
 	private String nome;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany()
 	private Set<RegraAtributo> regra = new HashSet<RegraAtributo>();
+
+	@Column(nullable = false)
+	private String tipo;
 
 	public Long getId() {
 		return this.id;
@@ -81,21 +81,30 @@ public class Atributo implements Serializable {
 		this.nome = nome;
 	}
 
-	@Override
-	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (nome != null && !nome.trim().isEmpty()) {
-			result += "nome: " + nome;
-		}
-		return result;
-	}
-
 	public Set<RegraAtributo> getRegra() {
 		return this.regra;
 	}
 
 	public void setRegra(final Set<RegraAtributo> regra) {
 		this.regra = regra;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	@Override
+	public String toString() {
+		String result = getClass().getSimpleName() + " ";
+		if (nome != null && !nome.trim().isEmpty())
+			result += "nome: " + nome;
+		if (tipo != null && !tipo.trim().isEmpty())
+			result += ", tipo: " + tipo;
+		return result;
 	}
 
 }

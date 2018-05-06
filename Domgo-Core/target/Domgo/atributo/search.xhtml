@@ -35,6 +35,12 @@
 							<h:message for="atributoBeanExampleNome" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
+						<h:outputLabel for="atributoBeanExampleTipo" value="Tipo:"/>
+						<h:panelGroup>
+							<h:inputText id="atributoBeanExampleTipo" value="#{atributoBean.example.tipo}"/>
+							<h:message for="atributoBeanExampleTipo" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
 					</h:panelGrid>
 					<h:panelGroup styleClass="buttons">
 						<h:commandLink value="Search" action='#{atributoBean.search}' styleClass="btn btn-primary"/>
@@ -51,6 +57,15 @@
 					<h:link outcome="/atributo/view">
 						<f:param name="id" value="#{_item.id}"/>
 						<h:outputText id="_itemNome" value="#{_item.nome}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo"/>
+					</f:facet>
+					<h:link outcome="/atributo/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="_itemTipo" value="#{_item.tipo}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

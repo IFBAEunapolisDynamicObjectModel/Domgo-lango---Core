@@ -69,6 +69,12 @@
 					</h:panelGrid>
 				</h:panelGroup>
 				<h:outputText/>
+				<h:outputLabel for="atributoBeanAtributoTipo" value="Tipo:"/>
+				<h:panelGroup>
+					<h:inputText id="atributoBeanAtributoTipo" required="true" value="#{atributoBean.atributo.tipo}"/>
+					<h:message for="atributoBeanAtributoTipo" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
 			</h:panelGrid>
 
 			<div class="buttons">
