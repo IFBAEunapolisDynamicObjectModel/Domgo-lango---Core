@@ -25,6 +25,12 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="atributoBeanAtributoNome" value="Nome:"/>
+			<h:outputText id="atributoBeanAtributoNome" value="#{atributoBean.atributo.nome}"/>
+			<h:outputText/>
+			<h:outputLabel for="atributoBeanAtributoTipo" value="Tipo:"/>
+			<h:outputText id="atributoBeanAtributoTipo" value="#{atributoBean.atributo.tipo}"/>
+			<h:outputText/>
 			<h:outputLabel for="atributoBeanAtributoRegras" value="Regras:"/>
 			<h:link id="atributoBeanAtributoRegras" outcome="/regraAtributo/view" rendered="#{!empty atributoBean.atributo.regras}" value="#{atributoBean.atributo.regras}">
 				<f:param name="id" value="#{atributoBean.atributo.regras.id}"/>

@@ -1,4 +1,4 @@
-package com.unity.domgocore.view;
+package com.unity.domgo.view;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;

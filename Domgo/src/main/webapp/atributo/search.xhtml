@@ -30,6 +30,18 @@
 				<h:panelGroup styleClass="search">
 
 					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="atributoBeanExampleNome" value="Nome:"/>
+						<h:panelGroup>
+							<h:inputText id="atributoBeanExampleNome" value="#{atributoBean.example.nome}"/>
+							<h:message for="atributoBeanExampleNome" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="atributoBeanExampleTipo" value="Tipo:"/>
+						<h:panelGroup>
+							<h:inputText id="atributoBeanExampleTipo" value="#{atributoBean.example.tipo}"/>
+							<h:message for="atributoBeanExampleTipo" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
 						<h:outputLabel for="atributoBeanExampleRegras" value="Regras:"/>
 						<h:panelGroup>
 							<h:selectOneMenu converter="#{regraAtributoBean.converter}" id="atributoBeanExampleRegras" value="#{atributoBean.example.regras}">
@@ -50,11 +62,20 @@
 			<h:dataTable id="atributoBeanPageItems" styleClass="data-table" value="#{atributoBean.pageItems}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Regras"/>
+						<h:outputText value="Nome"/>
 					</f:facet>
 					<h:link outcome="/atributo/view">
 						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemRegras" value="#{_item.regras}"/>
+						<h:outputText id="_itemNome" value="#{_item.nome}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo"/>
+					</f:facet>
+					<h:link outcome="/atributo/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="_itemTipo" value="#{_item.tipo}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

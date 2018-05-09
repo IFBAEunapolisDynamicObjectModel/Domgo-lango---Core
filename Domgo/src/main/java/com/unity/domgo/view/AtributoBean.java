@@ -1,4 +1,4 @@
-package com.unity.domgocore.view;
+package com.unity.domgo.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,14 +24,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.unity.domgocore.model.RegraAtributo;
+import com.unity.domgo.model.Atributo;
+import com.unity.domgo.model.RegraAtributo;
 
 /**
- * Backing bean for RegraAtributo entities.
+ * Backing bean for Atributo entities.
  * <p/>
- * This class provides CRUD functionality for all RegraAtributo entities. It
- * focuses purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt>
- * for state management, <tt>PersistenceContext</tt> for persistence,
+ * This class provides CRUD functionality for all Atributo entities. It focuses
+ * purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt> for
+ * state management, <tt>PersistenceContext</tt> for persistence,
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD
  * framework or custom base class.
  */
@@ -39,12 +40,12 @@ import com.unity.domgocore.model.RegraAtributo;
 @Named
 @Stateful
 @ConversationScoped
-public class RegraAtributoBean implements Serializable {
+public class AtributoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/*
-	 * Support creating and retrieving RegraAtributo entities
+	 * Support creating and retrieving Atributo entities
 	 */
 
 	private Long id;
@@ -57,20 +58,20 @@ public class RegraAtributoBean implements Serializable {
 		this.id = id;
 	}
 
-	private RegraAtributo regraAtributo;
+	private Atributo atributo;
 
-	public RegraAtributo getRegraAtributo() {
-		return this.regraAtributo;
+	public Atributo getAtributo() {
+		return this.atributo;
 	}
 
-	public void setRegraAtributo(RegraAtributo regraAtributo) {
-		this.regraAtributo = regraAtributo;
+	public void setAtributo(Atributo atributo) {
+		this.atributo = atributo;
 	}
 
 	@Inject
 	private Conversation conversation;
 
-	@PersistenceContext(unitName = "Domgo_Core-persistence-unit", type = PersistenceContextType.EXTENDED)
+	@PersistenceContext(unitName = "Domgo-persistence-unit", type = PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 
 	public String create() {
@@ -92,19 +93,19 @@ public class RegraAtributoBean implements Serializable {
 		}
 
 		if (this.id == null) {
-			this.regraAtributo = this.example;
+			this.atributo = this.example;
 		} else {
-			this.regraAtributo = findById(getId());
+			this.atributo = findById(getId());
 		}
 	}
 
-	public RegraAtributo findById(Long id) {
+	public Atributo findById(Long id) {
 
-		return this.entityManager.find(RegraAtributo.class, id);
+		return this.entityManager.find(Atributo.class, id);
 	}
 
 	/*
-	 * Support updating and deleting RegraAtributo entities
+	 * Support updating and deleting Atributo entities
 	 */
 
 	public String update() {
@@ -112,12 +113,11 @@ public class RegraAtributoBean implements Serializable {
 
 		try {
 			if (this.id == null) {
-				this.entityManager.persist(this.regraAtributo);
+				this.entityManager.persist(this.atributo);
 				return "search?faces-redirect=true";
 			} else {
-				this.entityManager.merge(this.regraAtributo);
-				return "view?faces-redirect=true&id="
-						+ this.regraAtributo.getId();
+				this.entityManager.merge(this.atributo);
+				return "view?faces-redirect=true&id=" + this.atributo.getId();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -130,7 +130,7 @@ public class RegraAtributoBean implements Serializable {
 		this.conversation.end();
 
 		try {
-			RegraAtributo deletableEntity = findById(getId());
+			Atributo deletableEntity = findById(getId());
 
 			this.entityManager.remove(deletableEntity);
 			this.entityManager.flush();
@@ -143,14 +143,14 @@ public class RegraAtributoBean implements Serializable {
 	}
 
 	/*
-	 * Support searching RegraAtributo entities with pagination
+	 * Support searching Atributo entities with pagination
 	 */
 
 	private int page;
 	private long count;
-	private List<RegraAtributo> pageItems;
+	private List<Atributo> pageItems;
 
-	private RegraAtributo example = new RegraAtributo();
+	private Atributo example = new Atributo();
 
 	public int getPage() {
 		return this.page;
@@ -164,11 +164,11 @@ public class RegraAtributoBean implements Serializable {
 		return 10;
 	}
 
-	public RegraAtributo getExample() {
+	public Atributo getExample() {
 		return this.example;
 	}
 
-	public void setExample(RegraAtributo example) {
+	public void setExample(Atributo example) {
 		this.example = example;
 	}
 
@@ -184,7 +184,7 @@ public class RegraAtributoBean implements Serializable {
 		// Populate this.count
 
 		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<RegraAtributo> root = countCriteria.from(RegraAtributo.class);
+		Root<Atributo> root = countCriteria.from(Atributo.class);
 		countCriteria = countCriteria.select(builder.count(root)).where(
 				getSearchPredicates(root));
 		this.count = this.entityManager.createQuery(countCriteria)
@@ -192,18 +192,16 @@ public class RegraAtributoBean implements Serializable {
 
 		// Populate this.pageItems
 
-		CriteriaQuery<RegraAtributo> criteria = builder
-				.createQuery(RegraAtributo.class);
-		root = criteria.from(RegraAtributo.class);
-		TypedQuery<RegraAtributo> query = this.entityManager
-				.createQuery(criteria.select(root).where(
-						getSearchPredicates(root)));
+		CriteriaQuery<Atributo> criteria = builder.createQuery(Atributo.class);
+		root = criteria.from(Atributo.class);
+		TypedQuery<Atributo> query = this.entityManager.createQuery(criteria
+				.select(root).where(getSearchPredicates(root)));
 		query.setFirstResult(this.page * getPageSize()).setMaxResults(
 				getPageSize());
 		this.pageItems = query.getResultList();
 	}
 
-	private Predicate[] getSearchPredicates(Root<RegraAtributo> root) {
+	private Predicate[] getSearchPredicates(Root<Atributo> root) {
 
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
@@ -214,17 +212,21 @@ public class RegraAtributoBean implements Serializable {
 					builder.lower(root.<String> get("nome")),
 					'%' + nome.toLowerCase() + '%'));
 		}
-		String descricao = this.example.getDescricao();
-		if (descricao != null && !"".equals(descricao)) {
+		String tipo = this.example.getTipo();
+		if (tipo != null && !"".equals(tipo)) {
 			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("descricao")),
-					'%' + descricao.toLowerCase() + '%'));
+					builder.lower(root.<String> get("tipo")),
+					'%' + tipo.toLowerCase() + '%'));
+		}
+		RegraAtributo regras = this.example.getRegras();
+		if (regras != null) {
+			predicatesList.add(builder.equal(root.get("regras"), regras));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
-	public List<RegraAtributo> getPageItems() {
+	public List<Atributo> getPageItems() {
 		return this.pageItems;
 	}
 
@@ -233,17 +235,16 @@ public class RegraAtributoBean implements Serializable {
 	}
 
 	/*
-	 * Support listing and POSTing back RegraAtributo entities (e.g. from inside
-	 * an HtmlSelectOneMenu)
+	 * Support listing and POSTing back Atributo entities (e.g. from inside an
+	 * HtmlSelectOneMenu)
 	 */
 
-	public List<RegraAtributo> getAll() {
+	public List<Atributo> getAll() {
 
-		CriteriaQuery<RegraAtributo> criteria = this.entityManager
-				.getCriteriaBuilder().createQuery(RegraAtributo.class);
+		CriteriaQuery<Atributo> criteria = this.entityManager
+				.getCriteriaBuilder().createQuery(Atributo.class);
 		return this.entityManager.createQuery(
-				criteria.select(criteria.from(RegraAtributo.class)))
-				.getResultList();
+				criteria.select(criteria.from(Atributo.class))).getResultList();
 	}
 
 	@Resource
@@ -251,8 +252,8 @@ public class RegraAtributoBean implements Serializable {
 
 	public Converter getConverter() {
 
-		final RegraAtributoBean ejbProxy = this.sessionContext
-				.getBusinessObject(RegraAtributoBean.class);
+		final AtributoBean ejbProxy = this.sessionContext
+				.getBusinessObject(AtributoBean.class);
 
 		return new Converter() {
 
@@ -271,7 +272,7 @@ public class RegraAtributoBean implements Serializable {
 					return "";
 				}
 
-				return String.valueOf(((RegraAtributo) value).getId());
+				return String.valueOf(((Atributo) value).getId());
 			}
 		};
 	}
@@ -280,15 +281,15 @@ public class RegraAtributoBean implements Serializable {
 	 * Support adding children to bidirectional, one-to-many tables
 	 */
 
-	private RegraAtributo add = new RegraAtributo();
+	private Atributo add = new Atributo();
 
-	public RegraAtributo getAdd() {
+	public Atributo getAdd() {
 		return this.add;
 	}
 
-	public RegraAtributo getAdded() {
-		RegraAtributo added = this.add;
-		this.add = new RegraAtributo();
+	public Atributo getAdded() {
+		Atributo added = this.add;
+		this.add = new Atributo();
 		return added;
 	}
 }

@@ -1,4 +1,4 @@
-package com.unity.domgocore.model;
+package com.unity.domgo.model;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -7,9 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
+import com.unity.domgo.model.RegraAtributo;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class RegraAtributo implements Serializable {
+public class Atributo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -24,7 +26,10 @@ public class RegraAtributo implements Serializable {
 	private String nome;
 
 	@Column(nullable = false)
-	private String descricao;
+	private String tipo;
+
+	@ManyToOne
+	private RegraAtributo regras;
 
 	public Long getId() {
 		return this.id;
@@ -47,10 +52,10 @@ public class RegraAtributo implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof RegraAtributo)) {
+		if (!(obj instanceof Atributo)) {
 			return false;
 		}
-		RegraAtributo other = (RegraAtributo) obj;
+		Atributo other = (Atributo) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -75,12 +80,12 @@ public class RegraAtributo implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
@@ -88,8 +93,16 @@ public class RegraAtributo implements Serializable {
 		String result = getClass().getSimpleName() + " ";
 		if (nome != null && !nome.trim().isEmpty())
 			result += "nome: " + nome;
-		if (descricao != null && !descricao.trim().isEmpty())
-			result += ", descricao: " + descricao;
+		if (tipo != null && !tipo.trim().isEmpty())
+			result += ", tipo: " + tipo;
 		return result;
+	}
+
+	public RegraAtributo getRegras() {
+		return this.regras;
+	}
+
+	public void setRegras(final RegraAtributo regras) {
+		this.regras = regras;
 	}
 }

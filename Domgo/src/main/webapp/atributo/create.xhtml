@@ -37,6 +37,18 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="atributoBeanAtributoNome" value="Nome:"/>
+				<h:panelGroup>
+					<h:inputText id="atributoBeanAtributoNome" required="true" value="#{atributoBean.atributo.nome}"/>
+					<h:message for="atributoBeanAtributoNome" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="atributoBeanAtributoTipo" value="Tipo:"/>
+				<h:panelGroup>
+					<h:inputText id="atributoBeanAtributoTipo" required="true" value="#{atributoBean.atributo.tipo}"/>
+					<h:message for="atributoBeanAtributoTipo" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
 				<h:outputLabel for="atributoBeanAtributoRegras" value="Regras:"/>
 				<h:panelGroup>
 					<h:selectOneMenu converter="#{regraAtributoBean.converter}" id="atributoBeanAtributoRegras" value="#{atributoBean.atributo.regras}">
