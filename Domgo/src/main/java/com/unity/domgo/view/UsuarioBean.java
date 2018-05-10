@@ -24,12 +24,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.unity.domgo.model.Atributo;
+import com.unity.domgo.model.Usuario;
 
 /**
- * Backing bean for Atributo entities.
+ * Backing bean for Usuario entities.
  * <p/>
- * This class provides CRUD functionality for all Atributo entities. It focuses
+ * This class provides CRUD functionality for all Usuario entities. It focuses
  * purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt> for
  * state management, <tt>PersistenceContext</tt> for persistence,
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD
@@ -39,12 +39,12 @@ import com.unity.domgo.model.Atributo;
 @Named
 @Stateful
 @ConversationScoped
-public class AtributoBean implements Serializable {
+public class UsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/*
-	 * Support creating and retrieving Atributo entities
+	 * Support creating and retrieving Usuario entities
 	 */
 
 	private Long id;
@@ -57,14 +57,14 @@ public class AtributoBean implements Serializable {
 		this.id = id;
 	}
 
-	private Atributo atributo;
+	private Usuario usuario;
 
-	public Atributo getAtributo() {
-		return this.atributo;
+	public Usuario getUsuario() {
+		return this.usuario;
 	}
 
-	public void setAtributo(Atributo atributo) {
-		this.atributo = atributo;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Inject
@@ -92,19 +92,19 @@ public class AtributoBean implements Serializable {
 		}
 
 		if (this.id == null) {
-			this.atributo = this.example;
+			this.usuario = this.example;
 		} else {
-			this.atributo = findById(getId());
+			this.usuario = findById(getId());
 		}
 	}
 
-	public Atributo findById(Long id) {
+	public Usuario findById(Long id) {
 
-		return this.entityManager.find(Atributo.class, id);
+		return this.entityManager.find(Usuario.class, id);
 	}
 
 	/*
-	 * Support updating and deleting Atributo entities
+	 * Support updating and deleting Usuario entities
 	 */
 
 	public String update() {
@@ -112,11 +112,11 @@ public class AtributoBean implements Serializable {
 
 		try {
 			if (this.id == null) {
-				this.entityManager.persist(this.atributo);
+				this.entityManager.persist(this.usuario);
 				return "search?faces-redirect=true";
 			} else {
-				this.entityManager.merge(this.atributo);
-				return "view?faces-redirect=true&id=" + this.atributo.getId();
+				this.entityManager.merge(this.usuario);
+				return "view?faces-redirect=true&id=" + this.usuario.getId();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -129,7 +129,7 @@ public class AtributoBean implements Serializable {
 		this.conversation.end();
 
 		try {
-			Atributo deletableEntity = findById(getId());
+			Usuario deletableEntity = findById(getId());
 
 			this.entityManager.remove(deletableEntity);
 			this.entityManager.flush();
@@ -142,14 +142,14 @@ public class AtributoBean implements Serializable {
 	}
 
 	/*
-	 * Support searching Atributo entities with pagination
+	 * Support searching Usuario entities with pagination
 	 */
 
 	private int page;
 	private long count;
-	private List<Atributo> pageItems;
+	private List<Usuario> pageItems;
 
-	private Atributo example = new Atributo();
+	private Usuario example = new Usuario();
 
 	public int getPage() {
 		return this.page;
@@ -163,11 +163,11 @@ public class AtributoBean implements Serializable {
 		return 10;
 	}
 
-	public Atributo getExample() {
+	public Usuario getExample() {
 		return this.example;
 	}
 
-	public void setExample(Atributo example) {
+	public void setExample(Usuario example) {
 		this.example = example;
 	}
 
@@ -183,7 +183,7 @@ public class AtributoBean implements Serializable {
 		// Populate this.count
 
 		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<Atributo> root = countCriteria.from(Atributo.class);
+		Root<Usuario> root = countCriteria.from(Usuario.class);
 		countCriteria = countCriteria.select(builder.count(root)).where(
 				getSearchPredicates(root));
 		this.count = this.entityManager.createQuery(countCriteria)
@@ -191,16 +191,16 @@ public class AtributoBean implements Serializable {
 
 		// Populate this.pageItems
 
-		CriteriaQuery<Atributo> criteria = builder.createQuery(Atributo.class);
-		root = criteria.from(Atributo.class);
-		TypedQuery<Atributo> query = this.entityManager.createQuery(criteria
+		CriteriaQuery<Usuario> criteria = builder.createQuery(Usuario.class);
+		root = criteria.from(Usuario.class);
+		TypedQuery<Usuario> query = this.entityManager.createQuery(criteria
 				.select(root).where(getSearchPredicates(root)));
 		query.setFirstResult(this.page * getPageSize()).setMaxResults(
 				getPageSize());
 		this.pageItems = query.getResultList();
 	}
 
-	private Predicate[] getSearchPredicates(Root<Atributo> root) {
+	private Predicate[] getSearchPredicates(Root<Usuario> root) {
 
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
@@ -211,17 +211,23 @@ public class AtributoBean implements Serializable {
 					builder.lower(root.<String> get("nome")),
 					'%' + nome.toLowerCase() + '%'));
 		}
-		String tipo = this.example.getTipo();
-		if (tipo != null && !"".equals(tipo)) {
+		String login = this.example.getLogin();
+		if (login != null && !"".equals(login)) {
 			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("tipo")),
-					'%' + tipo.toLowerCase() + '%'));
+					builder.lower(root.<String> get("login")),
+					'%' + login.toLowerCase() + '%'));
+		}
+		String senha = this.example.getSenha();
+		if (senha != null && !"".equals(senha)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("senha")),
+					'%' + senha.toLowerCase() + '%'));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
-	public List<Atributo> getPageItems() {
+	public List<Usuario> getPageItems() {
 		return this.pageItems;
 	}
 
@@ -230,16 +236,16 @@ public class AtributoBean implements Serializable {
 	}
 
 	/*
-	 * Support listing and POSTing back Atributo entities (e.g. from inside an
+	 * Support listing and POSTing back Usuario entities (e.g. from inside an
 	 * HtmlSelectOneMenu)
 	 */
 
-	public List<Atributo> getAll() {
+	public List<Usuario> getAll() {
 
-		CriteriaQuery<Atributo> criteria = this.entityManager
-				.getCriteriaBuilder().createQuery(Atributo.class);
+		CriteriaQuery<Usuario> criteria = this.entityManager
+				.getCriteriaBuilder().createQuery(Usuario.class);
 		return this.entityManager.createQuery(
-				criteria.select(criteria.from(Atributo.class))).getResultList();
+				criteria.select(criteria.from(Usuario.class))).getResultList();
 	}
 
 	@Resource
@@ -247,8 +253,8 @@ public class AtributoBean implements Serializable {
 
 	public Converter getConverter() {
 
-		final AtributoBean ejbProxy = this.sessionContext
-				.getBusinessObject(AtributoBean.class);
+		final UsuarioBean ejbProxy = this.sessionContext
+				.getBusinessObject(UsuarioBean.class);
 
 		return new Converter() {
 
@@ -267,7 +273,7 @@ public class AtributoBean implements Serializable {
 					return "";
 				}
 
-				return String.valueOf(((Atributo) value).getId());
+				return String.valueOf(((Usuario) value).getId());
 			}
 		};
 	}
@@ -276,15 +282,15 @@ public class AtributoBean implements Serializable {
 	 * Support adding children to bidirectional, one-to-many tables
 	 */
 
-	private Atributo add = new Atributo();
+	private Usuario add = new Usuario();
 
-	public Atributo getAdd() {
+	public Usuario getAdd() {
 		return this.add;
 	}
 
-	public Atributo getAdded() {
-		Atributo added = this.add;
-		this.add = new Atributo();
+	public Usuario getAdded() {
+		Usuario added = this.add;
+		this.add = new Usuario();
 		return added;
 	}
 }

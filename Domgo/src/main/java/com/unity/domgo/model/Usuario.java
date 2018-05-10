@@ -12,7 +12,7 @@ import java.util.HashSet;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Atributo implements Serializable {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -27,10 +27,13 @@ public class Atributo implements Serializable {
 	private String nome;
 
 	@Column(nullable = false)
-	private String tipo;
+	private String login;
+
+	@Column(nullable = false)
+	private String senha;
 
 	@ManyToMany
-	private Set<RegraAtributo> regras = new HashSet<RegraAtributo>();
+	private Set<Sistema> sistemas = new HashSet<Sistema>();
 
 	public Long getId() {
 		return this.id;
@@ -53,10 +56,10 @@ public class Atributo implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Atributo)) {
+		if (!(obj instanceof Usuario)) {
 			return false;
 		}
-		Atributo other = (Atributo) obj;
+		Usuario other = (Usuario) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -81,12 +84,20 @@ public class Atributo implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Override
@@ -95,17 +106,20 @@ public class Atributo implements Serializable {
 		if (nome != null && !nome.trim().isEmpty()) {
 			result += "nome: " + nome;
 		}
-		if (tipo != null && !tipo.trim().isEmpty()) {
-			result += ", tipo: " + tipo;
+		if (login != null && !login.trim().isEmpty()) {
+			result += ", login: " + login;
+		}
+		if (senha != null && !senha.trim().isEmpty()) {
+			result += ", senha: " + senha;
 		}
 		return result;
 	}
 
-	public Set<RegraAtributo> getRegras() {
-		return this.regras;
+	public Set<Sistema> getSistemas() {
+		return this.sistemas;
 	}
 
-	public void setRegras(final Set<RegraAtributo> regras) {
-		this.regras = regras;
+	public void setSistemas(final Set<Sistema> sistemas) {
+		this.sistemas = sistemas;
 	}
 }

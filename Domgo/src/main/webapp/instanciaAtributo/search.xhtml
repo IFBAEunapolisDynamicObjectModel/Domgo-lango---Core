@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{instanciaAtributoBean.page}'/>
+		<f:event type="preRenderView" listener='#{instanciaAtributoBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Instancia Atributo entities"/>
+
+	<ui:define name="header">
+		Instancia Atributo
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Instancia Atributo entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="instanciaAtributoBeanExampleValor" value="Valor:"/>
+						<h:panelGroup>
+							<h:inputText id="instanciaAtributoBeanExampleValor" value="#{instanciaAtributoBean.example.valor}"/>
+							<h:message for="instanciaAtributoBeanExampleValor" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="instanciaAtributoBeanExampleAtributo" value="Atributo:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{atributoBean.converter}" id="instanciaAtributoBeanExampleAtributo" value="#{instanciaAtributoBean.example.atributo}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{atributoBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="instanciaAtributoBeanExampleAtributo" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{instanciaAtributoBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{instanciaAtributoBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="instanciaAtributoBeanPageItems" styleClass="data-table" value="#{instanciaAtributoBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Valor"/>
+					</f:facet>
+					<h:link outcome="/instanciaAtributo/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="_itemValor" value="#{_item.valor}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{instanciaAtributoBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

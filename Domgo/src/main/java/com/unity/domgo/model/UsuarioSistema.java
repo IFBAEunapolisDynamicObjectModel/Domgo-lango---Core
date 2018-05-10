@@ -10,9 +10,10 @@ import javax.persistence.Version;
 import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.ManyToMany;
+import javax.persistence.Enumerated;
 
 @Entity
-public class Atributo implements Serializable {
+public class UsuarioSistema implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -23,14 +24,11 @@ public class Atributo implements Serializable {
 	@Column(name = "version")
 	private int version;
 
-	@Column(nullable = false)
-	private String nome;
-
-	@Column(nullable = false)
-	private String tipo;
-
 	@ManyToMany
-	private Set<RegraAtributo> regras = new HashSet<RegraAtributo>();
+	private Set<Atributo> atributos = new HashSet<Atributo>();
+
+	@Enumerated
+	private NivelDeAcesso nivelDeAcesso;
 
 	public Long getId() {
 		return this.id;
@@ -53,10 +51,10 @@ public class Atributo implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Atributo)) {
+		if (!(obj instanceof UsuarioSistema)) {
 			return false;
 		}
-		Atributo other = (Atributo) obj;
+		UsuarioSistema other = (UsuarioSistema) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -73,39 +71,19 @@ public class Atributo implements Serializable {
 		return result;
 	}
 
-	public String getNome() {
-		return nome;
+	public Set<Atributo> getAtributos() {
+		return this.atributos;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setAtributos(final Set<Atributo> atributos) {
+		this.atributos = atributos;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public NivelDeAcesso getNivelDeAcesso() {
+		return nivelDeAcesso;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	@Override
-	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (nome != null && !nome.trim().isEmpty()) {
-			result += "nome: " + nome;
-		}
-		if (tipo != null && !tipo.trim().isEmpty()) {
-			result += ", tipo: " + tipo;
-		}
-		return result;
-	}
-
-	public Set<RegraAtributo> getRegras() {
-		return this.regras;
-	}
-
-	public void setRegras(final Set<RegraAtributo> regras) {
-		this.regras = regras;
+	public void setNivelDeAcesso(NivelDeAcesso nivelDeAcesso) {
+		this.nivelDeAcesso = nivelDeAcesso;
 	}
 }

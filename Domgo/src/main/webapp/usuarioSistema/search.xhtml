@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{usuarioSistemaBean.page}'/>
+		<f:event type="preRenderView" listener='#{usuarioSistemaBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Usuario Sistema entities"/>
+
+	<ui:define name="header">
+		Usuario Sistema
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Usuario Sistema entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="usuarioSistemaBeanExampleNivelDeAcesso" value="Nivel De Acesso:"/>
+						<h:panelGroup>
+							<h:selectOneMenu id="usuarioSistemaBeanExampleNivelDeAcesso" value="#{usuarioSistemaBean.example.nivelDeAcesso}">
+								<f:selectItem/>
+								<f:selectItem itemValue="ROOT"/>
+								<f:selectItem itemValue="USER"/>
+								<f:selectItem itemValue="ADMIN"/>
+							</h:selectOneMenu>
+							<h:message for="usuarioSistemaBeanExampleNivelDeAcesso" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{usuarioSistemaBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{usuarioSistemaBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="usuarioSistemaBeanPageItems" styleClass="data-table" value="#{usuarioSistemaBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nivel De Acesso"/>
+					</f:facet>
+					<h:link outcome="/usuarioSistema/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="_itemNivelDeAcesso" value="#{_item.nivelDeAcesso}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{usuarioSistemaBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

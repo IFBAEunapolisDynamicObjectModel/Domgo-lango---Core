@@ -7,12 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
-import java.util.Set;
-import java.util.HashSet;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Atributo implements Serializable {
+public class InstanciaAtributo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -24,13 +22,10 @@ public class Atributo implements Serializable {
 	private int version;
 
 	@Column(nullable = false)
-	private String nome;
+	private String valor;
 
-	@Column(nullable = false)
-	private String tipo;
-
-	@ManyToMany
-	private Set<RegraAtributo> regras = new HashSet<RegraAtributo>();
+	@ManyToOne
+	private Atributo atributo;
 
 	public Long getId() {
 		return this.id;
@@ -53,10 +48,10 @@ public class Atributo implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Atributo)) {
+		if (!(obj instanceof InstanciaAtributo)) {
 			return false;
 		}
-		Atributo other = (Atributo) obj;
+		InstanciaAtributo other = (InstanciaAtributo) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -73,39 +68,29 @@ public class Atributo implements Serializable {
 		return result;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getValor() {
+		return valor;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setValor(String valor) {
+		this.valor = valor;
 	}
 
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
-		if (nome != null && !nome.trim().isEmpty()) {
-			result += "nome: " + nome;
-		}
-		if (tipo != null && !tipo.trim().isEmpty()) {
-			result += ", tipo: " + tipo;
+		if (valor != null && !valor.trim().isEmpty()) {
+			result += "valor: " + valor;
 		}
 		return result;
 	}
 
-	public Set<RegraAtributo> getRegras() {
-		return this.regras;
+	public Atributo getAtributo() {
+		return this.atributo;
 	}
 
-	public void setRegras(final Set<RegraAtributo> regras) {
-		this.regras = regras;
+	public void setAtributo(final Atributo atributo) {
+		this.atributo = atributo;
 	}
+
 }

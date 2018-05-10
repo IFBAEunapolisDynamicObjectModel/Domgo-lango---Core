@@ -24,12 +24,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.unity.domgo.model.Atributo;
+import com.unity.domgo.model.Entidade;
 
 /**
- * Backing bean for Atributo entities.
+ * Backing bean for Entidade entities.
  * <p/>
- * This class provides CRUD functionality for all Atributo entities. It focuses
+ * This class provides CRUD functionality for all Entidade entities. It focuses
  * purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt> for
  * state management, <tt>PersistenceContext</tt> for persistence,
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD
@@ -39,12 +39,12 @@ import com.unity.domgo.model.Atributo;
 @Named
 @Stateful
 @ConversationScoped
-public class AtributoBean implements Serializable {
+public class EntidadeBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/*
-	 * Support creating and retrieving Atributo entities
+	 * Support creating and retrieving Entidade entities
 	 */
 
 	private Long id;
@@ -57,14 +57,14 @@ public class AtributoBean implements Serializable {
 		this.id = id;
 	}
 
-	private Atributo atributo;
+	private Entidade entidade;
 
-	public Atributo getAtributo() {
-		return this.atributo;
+	public Entidade getEntidade() {
+		return this.entidade;
 	}
 
-	public void setAtributo(Atributo atributo) {
-		this.atributo = atributo;
+	public void setEntidade(Entidade entidade) {
+		this.entidade = entidade;
 	}
 
 	@Inject
@@ -92,19 +92,19 @@ public class AtributoBean implements Serializable {
 		}
 
 		if (this.id == null) {
-			this.atributo = this.example;
+			this.entidade = this.example;
 		} else {
-			this.atributo = findById(getId());
+			this.entidade = findById(getId());
 		}
 	}
 
-	public Atributo findById(Long id) {
+	public Entidade findById(Long id) {
 
-		return this.entityManager.find(Atributo.class, id);
+		return this.entityManager.find(Entidade.class, id);
 	}
 
 	/*
-	 * Support updating and deleting Atributo entities
+	 * Support updating and deleting Entidade entities
 	 */
 
 	public String update() {
@@ -112,11 +112,11 @@ public class AtributoBean implements Serializable {
 
 		try {
 			if (this.id == null) {
-				this.entityManager.persist(this.atributo);
+				this.entityManager.persist(this.entidade);
 				return "search?faces-redirect=true";
 			} else {
-				this.entityManager.merge(this.atributo);
-				return "view?faces-redirect=true&id=" + this.atributo.getId();
+				this.entityManager.merge(this.entidade);
+				return "view?faces-redirect=true&id=" + this.entidade.getId();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -129,7 +129,7 @@ public class AtributoBean implements Serializable {
 		this.conversation.end();
 
 		try {
-			Atributo deletableEntity = findById(getId());
+			Entidade deletableEntity = findById(getId());
 
 			this.entityManager.remove(deletableEntity);
 			this.entityManager.flush();
@@ -142,14 +142,14 @@ public class AtributoBean implements Serializable {
 	}
 
 	/*
-	 * Support searching Atributo entities with pagination
+	 * Support searching Entidade entities with pagination
 	 */
 
 	private int page;
 	private long count;
-	private List<Atributo> pageItems;
+	private List<Entidade> pageItems;
 
-	private Atributo example = new Atributo();
+	private Entidade example = new Entidade();
 
 	public int getPage() {
 		return this.page;
@@ -163,11 +163,11 @@ public class AtributoBean implements Serializable {
 		return 10;
 	}
 
-	public Atributo getExample() {
+	public Entidade getExample() {
 		return this.example;
 	}
 
-	public void setExample(Atributo example) {
+	public void setExample(Entidade example) {
 		this.example = example;
 	}
 
@@ -183,7 +183,7 @@ public class AtributoBean implements Serializable {
 		// Populate this.count
 
 		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<Atributo> root = countCriteria.from(Atributo.class);
+		Root<Entidade> root = countCriteria.from(Entidade.class);
 		countCriteria = countCriteria.select(builder.count(root)).where(
 				getSearchPredicates(root));
 		this.count = this.entityManager.createQuery(countCriteria)
@@ -191,16 +191,16 @@ public class AtributoBean implements Serializable {
 
 		// Populate this.pageItems
 
-		CriteriaQuery<Atributo> criteria = builder.createQuery(Atributo.class);
-		root = criteria.from(Atributo.class);
-		TypedQuery<Atributo> query = this.entityManager.createQuery(criteria
+		CriteriaQuery<Entidade> criteria = builder.createQuery(Entidade.class);
+		root = criteria.from(Entidade.class);
+		TypedQuery<Entidade> query = this.entityManager.createQuery(criteria
 				.select(root).where(getSearchPredicates(root)));
 		query.setFirstResult(this.page * getPageSize()).setMaxResults(
 				getPageSize());
 		this.pageItems = query.getResultList();
 	}
 
-	private Predicate[] getSearchPredicates(Root<Atributo> root) {
+	private Predicate[] getSearchPredicates(Root<Entidade> root) {
 
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
@@ -211,17 +211,11 @@ public class AtributoBean implements Serializable {
 					builder.lower(root.<String> get("nome")),
 					'%' + nome.toLowerCase() + '%'));
 		}
-		String tipo = this.example.getTipo();
-		if (tipo != null && !"".equals(tipo)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("tipo")),
-					'%' + tipo.toLowerCase() + '%'));
-		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
-	public List<Atributo> getPageItems() {
+	public List<Entidade> getPageItems() {
 		return this.pageItems;
 	}
 
@@ -230,16 +224,16 @@ public class AtributoBean implements Serializable {
 	}
 
 	/*
-	 * Support listing and POSTing back Atributo entities (e.g. from inside an
+	 * Support listing and POSTing back Entidade entities (e.g. from inside an
 	 * HtmlSelectOneMenu)
 	 */
 
-	public List<Atributo> getAll() {
+	public List<Entidade> getAll() {
 
-		CriteriaQuery<Atributo> criteria = this.entityManager
-				.getCriteriaBuilder().createQuery(Atributo.class);
+		CriteriaQuery<Entidade> criteria = this.entityManager
+				.getCriteriaBuilder().createQuery(Entidade.class);
 		return this.entityManager.createQuery(
-				criteria.select(criteria.from(Atributo.class))).getResultList();
+				criteria.select(criteria.from(Entidade.class))).getResultList();
 	}
 
 	@Resource
@@ -247,8 +241,8 @@ public class AtributoBean implements Serializable {
 
 	public Converter getConverter() {
 
-		final AtributoBean ejbProxy = this.sessionContext
-				.getBusinessObject(AtributoBean.class);
+		final EntidadeBean ejbProxy = this.sessionContext
+				.getBusinessObject(EntidadeBean.class);
 
 		return new Converter() {
 
@@ -267,7 +261,7 @@ public class AtributoBean implements Serializable {
 					return "";
 				}
 
-				return String.valueOf(((Atributo) value).getId());
+				return String.valueOf(((Entidade) value).getId());
 			}
 		};
 	}
@@ -276,15 +270,15 @@ public class AtributoBean implements Serializable {
 	 * Support adding children to bidirectional, one-to-many tables
 	 */
 
-	private Atributo add = new Atributo();
+	private Entidade add = new Entidade();
 
-	public Atributo getAdd() {
+	public Entidade getAdd() {
 		return this.add;
 	}
 
-	public Atributo getAdded() {
-		Atributo added = this.add;
-		this.add = new Atributo();
+	public Entidade getAdded() {
+		Entidade added = this.add;
+		this.add = new Entidade();
 		return added;
 	}
 }

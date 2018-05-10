@@ -7,12 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
-import java.util.Set;
-import java.util.HashSet;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Atributo implements Serializable {
+public class InstanciaEntidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -23,14 +21,11 @@ public class Atributo implements Serializable {
 	@Column(name = "version")
 	private int version;
 
-	@Column(nullable = false)
-	private String nome;
+	@ManyToOne
+	private Entidade entidades;
 
-	@Column(nullable = false)
-	private String tipo;
-
-	@ManyToMany
-	private Set<RegraAtributo> regras = new HashSet<RegraAtributo>();
+	@ManyToOne
+	private InstanciaAtributo instanciaAtributo;
 
 	public Long getId() {
 		return this.id;
@@ -53,10 +48,10 @@ public class Atributo implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Atributo)) {
+		if (!(obj instanceof InstanciaEntidade)) {
 			return false;
 		}
-		Atributo other = (Atributo) obj;
+		InstanciaEntidade other = (InstanciaEntidade) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -73,39 +68,20 @@ public class Atributo implements Serializable {
 		return result;
 	}
 
-	public String getNome() {
-		return nome;
+	public Entidade getEntidades() {
+		return this.entidades;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setEntidades(final Entidade entidades) {
+		this.entidades = entidades;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public InstanciaAtributo getInstanciaAtributo() {
+		return this.instanciaAtributo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setInstanciaAtributo(final InstanciaAtributo instanciaAtributo) {
+		this.instanciaAtributo = instanciaAtributo;
 	}
 
-	@Override
-	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (nome != null && !nome.trim().isEmpty()) {
-			result += "nome: " + nome;
-		}
-		if (tipo != null && !tipo.trim().isEmpty()) {
-			result += ", tipo: " + tipo;
-		}
-		return result;
-	}
-
-	public Set<RegraAtributo> getRegras() {
-		return this.regras;
-	}
-
-	public void setRegras(final Set<RegraAtributo> regras) {
-		this.regras = regras;
-	}
 }

@@ -12,7 +12,7 @@ import java.util.HashSet;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Atributo implements Serializable {
+public class Sistema implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -26,11 +26,11 @@ public class Atributo implements Serializable {
 	@Column(nullable = false)
 	private String nome;
 
-	@Column(nullable = false)
-	private String tipo;
+	@ManyToMany
+	private Set<UsuarioSistema> usuarios = new HashSet<UsuarioSistema>();
 
 	@ManyToMany
-	private Set<RegraAtributo> regras = new HashSet<RegraAtributo>();
+	private Set<Entidade> entidades = new HashSet<Entidade>();
 
 	public Long getId() {
 		return this.id;
@@ -53,10 +53,10 @@ public class Atributo implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Atributo)) {
+		if (!(obj instanceof Sistema)) {
 			return false;
 		}
-		Atributo other = (Atributo) obj;
+		Sistema other = (Sistema) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -81,12 +81,12 @@ public class Atributo implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public Set<UsuarioSistema> getUsuarios() {
+		return this.usuarios;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setUsuarios(final Set<UsuarioSistema> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	@Override
@@ -95,17 +95,14 @@ public class Atributo implements Serializable {
 		if (nome != null && !nome.trim().isEmpty()) {
 			result += "nome: " + nome;
 		}
-		if (tipo != null && !tipo.trim().isEmpty()) {
-			result += ", tipo: " + tipo;
-		}
 		return result;
 	}
 
-	public Set<RegraAtributo> getRegras() {
-		return this.regras;
+	public Set<Entidade> getEntidades() {
+		return this.entidades;
 	}
 
-	public void setRegras(final Set<RegraAtributo> regras) {
-		this.regras = regras;
+	public void setEntidades(final Set<Entidade> entidades) {
+		this.entidades = entidades;
 	}
 }

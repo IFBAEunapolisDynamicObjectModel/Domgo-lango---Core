@@ -4,7 +4,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:forgeview="http://jboss.org/forge/view"
 	template="/resources/scaffold/pageTemplate.xhtml">
 
 	<f:metadata>
@@ -40,15 +39,6 @@
 						<h:panelGroup>
 							<h:inputText id="atributoBeanExampleTipo" value="#{atributoBean.example.tipo}"/>
 							<h:message for="atributoBeanExampleTipo" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
-						<h:outputLabel for="atributoBeanExampleRegras" value="Regras:"/>
-						<h:panelGroup>
-							<h:selectOneMenu converter="#{regraAtributoBean.converter}" id="atributoBeanExampleRegras" value="#{atributoBean.example.regras}">
-								<f:selectItem/>
-								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{regraAtributoBean.all}" var="_item"/>
-							</h:selectOneMenu>
-							<h:message for="atributoBeanExampleRegras" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 					</h:panelGrid>

@@ -24,14 +24,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.unity.domgo.model.Atributo;
+import com.unity.domgo.model.InstanciaSistema;
+import com.unity.domgo.model.Sistema;
 
 /**
- * Backing bean for Atributo entities.
+ * Backing bean for InstanciaSistema entities.
  * <p/>
- * This class provides CRUD functionality for all Atributo entities. It focuses
- * purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt> for
- * state management, <tt>PersistenceContext</tt> for persistence,
+ * This class provides CRUD functionality for all InstanciaSistema entities. It
+ * focuses purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt>
+ * for state management, <tt>PersistenceContext</tt> for persistence,
  * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD
  * framework or custom base class.
  */
@@ -39,12 +40,12 @@ import com.unity.domgo.model.Atributo;
 @Named
 @Stateful
 @ConversationScoped
-public class AtributoBean implements Serializable {
+public class InstanciaSistemaBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/*
-	 * Support creating and retrieving Atributo entities
+	 * Support creating and retrieving InstanciaSistema entities
 	 */
 
 	private Long id;
@@ -57,14 +58,14 @@ public class AtributoBean implements Serializable {
 		this.id = id;
 	}
 
-	private Atributo atributo;
+	private InstanciaSistema instanciaSistema;
 
-	public Atributo getAtributo() {
-		return this.atributo;
+	public InstanciaSistema getInstanciaSistema() {
+		return this.instanciaSistema;
 	}
 
-	public void setAtributo(Atributo atributo) {
-		this.atributo = atributo;
+	public void setInstanciaSistema(InstanciaSistema instanciaSistema) {
+		this.instanciaSistema = instanciaSistema;
 	}
 
 	@Inject
@@ -92,19 +93,19 @@ public class AtributoBean implements Serializable {
 		}
 
 		if (this.id == null) {
-			this.atributo = this.example;
+			this.instanciaSistema = this.example;
 		} else {
-			this.atributo = findById(getId());
+			this.instanciaSistema = findById(getId());
 		}
 	}
 
-	public Atributo findById(Long id) {
+	public InstanciaSistema findById(Long id) {
 
-		return this.entityManager.find(Atributo.class, id);
+		return this.entityManager.find(InstanciaSistema.class, id);
 	}
 
 	/*
-	 * Support updating and deleting Atributo entities
+	 * Support updating and deleting InstanciaSistema entities
 	 */
 
 	public String update() {
@@ -112,11 +113,12 @@ public class AtributoBean implements Serializable {
 
 		try {
 			if (this.id == null) {
-				this.entityManager.persist(this.atributo);
+				this.entityManager.persist(this.instanciaSistema);
 				return "search?faces-redirect=true";
 			} else {
-				this.entityManager.merge(this.atributo);
-				return "view?faces-redirect=true&id=" + this.atributo.getId();
+				this.entityManager.merge(this.instanciaSistema);
+				return "view?faces-redirect=true&id="
+						+ this.instanciaSistema.getId();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -129,7 +131,7 @@ public class AtributoBean implements Serializable {
 		this.conversation.end();
 
 		try {
-			Atributo deletableEntity = findById(getId());
+			InstanciaSistema deletableEntity = findById(getId());
 
 			this.entityManager.remove(deletableEntity);
 			this.entityManager.flush();
@@ -142,14 +144,14 @@ public class AtributoBean implements Serializable {
 	}
 
 	/*
-	 * Support searching Atributo entities with pagination
+	 * Support searching InstanciaSistema entities with pagination
 	 */
 
 	private int page;
 	private long count;
-	private List<Atributo> pageItems;
+	private List<InstanciaSistema> pageItems;
 
-	private Atributo example = new Atributo();
+	private InstanciaSistema example = new InstanciaSistema();
 
 	public int getPage() {
 		return this.page;
@@ -163,11 +165,11 @@ public class AtributoBean implements Serializable {
 		return 10;
 	}
 
-	public Atributo getExample() {
+	public InstanciaSistema getExample() {
 		return this.example;
 	}
 
-	public void setExample(Atributo example) {
+	public void setExample(InstanciaSistema example) {
 		this.example = example;
 	}
 
@@ -183,7 +185,8 @@ public class AtributoBean implements Serializable {
 		// Populate this.count
 
 		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<Atributo> root = countCriteria.from(Atributo.class);
+		Root<InstanciaSistema> root = countCriteria
+				.from(InstanciaSistema.class);
 		countCriteria = countCriteria.select(builder.count(root)).where(
 				getSearchPredicates(root));
 		this.count = this.entityManager.createQuery(countCriteria)
@@ -191,37 +194,31 @@ public class AtributoBean implements Serializable {
 
 		// Populate this.pageItems
 
-		CriteriaQuery<Atributo> criteria = builder.createQuery(Atributo.class);
-		root = criteria.from(Atributo.class);
-		TypedQuery<Atributo> query = this.entityManager.createQuery(criteria
-				.select(root).where(getSearchPredicates(root)));
+		CriteriaQuery<InstanciaSistema> criteria = builder
+				.createQuery(InstanciaSistema.class);
+		root = criteria.from(InstanciaSistema.class);
+		TypedQuery<InstanciaSistema> query = this.entityManager
+				.createQuery(criteria.select(root).where(
+						getSearchPredicates(root)));
 		query.setFirstResult(this.page * getPageSize()).setMaxResults(
 				getPageSize());
 		this.pageItems = query.getResultList();
 	}
 
-	private Predicate[] getSearchPredicates(Root<Atributo> root) {
+	private Predicate[] getSearchPredicates(Root<InstanciaSistema> root) {
 
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String nome = this.example.getNome();
-		if (nome != null && !"".equals(nome)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("nome")),
-					'%' + nome.toLowerCase() + '%'));
-		}
-		String tipo = this.example.getTipo();
-		if (tipo != null && !"".equals(tipo)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("tipo")),
-					'%' + tipo.toLowerCase() + '%'));
+		Sistema sistema = this.example.getSistema();
+		if (sistema != null) {
+			predicatesList.add(builder.equal(root.get("sistema"), sistema));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
-	public List<Atributo> getPageItems() {
+	public List<InstanciaSistema> getPageItems() {
 		return this.pageItems;
 	}
 
@@ -230,16 +227,17 @@ public class AtributoBean implements Serializable {
 	}
 
 	/*
-	 * Support listing and POSTing back Atributo entities (e.g. from inside an
-	 * HtmlSelectOneMenu)
+	 * Support listing and POSTing back InstanciaSistema entities (e.g. from
+	 * inside an HtmlSelectOneMenu)
 	 */
 
-	public List<Atributo> getAll() {
+	public List<InstanciaSistema> getAll() {
 
-		CriteriaQuery<Atributo> criteria = this.entityManager
-				.getCriteriaBuilder().createQuery(Atributo.class);
+		CriteriaQuery<InstanciaSistema> criteria = this.entityManager
+				.getCriteriaBuilder().createQuery(InstanciaSistema.class);
 		return this.entityManager.createQuery(
-				criteria.select(criteria.from(Atributo.class))).getResultList();
+				criteria.select(criteria.from(InstanciaSistema.class)))
+				.getResultList();
 	}
 
 	@Resource
@@ -247,8 +245,8 @@ public class AtributoBean implements Serializable {
 
 	public Converter getConverter() {
 
-		final AtributoBean ejbProxy = this.sessionContext
-				.getBusinessObject(AtributoBean.class);
+		final InstanciaSistemaBean ejbProxy = this.sessionContext
+				.getBusinessObject(InstanciaSistemaBean.class);
 
 		return new Converter() {
 
@@ -267,7 +265,7 @@ public class AtributoBean implements Serializable {
 					return "";
 				}
 
-				return String.valueOf(((Atributo) value).getId());
+				return String.valueOf(((InstanciaSistema) value).getId());
 			}
 		};
 	}
@@ -276,15 +274,15 @@ public class AtributoBean implements Serializable {
 	 * Support adding children to bidirectional, one-to-many tables
 	 */
 
-	private Atributo add = new Atributo();
+	private InstanciaSistema add = new InstanciaSistema();
 
-	public Atributo getAdd() {
+	public InstanciaSistema getAdd() {
 		return this.add;
 	}
 
-	public Atributo getAdded() {
-		Atributo added = this.add;
-		this.add = new Atributo();
+	public InstanciaSistema getAdded() {
+		InstanciaSistema added = this.add;
+		this.add = new InstanciaSistema();
 		return added;
 	}
 }

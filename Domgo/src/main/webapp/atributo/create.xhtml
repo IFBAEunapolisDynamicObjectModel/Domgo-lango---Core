@@ -51,11 +51,37 @@
 				<h:outputText value="*"/>
 				<h:outputLabel for="atributoBeanAtributoRegras" value="Regras:"/>
 				<h:panelGroup>
-					<h:selectOneMenu converter="#{regraAtributoBean.converter}" id="atributoBeanAtributoRegras" value="#{atributoBean.atributo.regras}">
-						<f:selectItem/>
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{regraAtributoBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="atributoBeanAtributoRegras" styleClass="error"/>
+					<ui:param name="_collection" value="#{atributoBean.atributo.regras}"/>
+					<h:dataTable id="atributoBeanAtributoRegras" styleClass="data-table" value="#{forgeview:asList(_collection)}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Nome"/>
+							</f:facet>
+							<h:link outcome="/regraAtributo/view">
+								<f:param name="id" value="#{_item.id}"/>
+								<h:outputText id="_itemNome" value="#{_item.nome}"/>
+							</h:link>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Descricao"/>
+							</f:facet>
+							<h:link outcome="/regraAtributo/view">
+								<f:param name="id" value="#{_item.id}"/>
+								<h:outputText id="_itemDescricao" value="#{_item.descricao}"/>
+							</h:link>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+						</h:column>
+					</h:dataTable>
+					<h:panelGrid columnClasses=",remove-column" columns="2" styleClass="data-table-footer">
+						<h:selectOneMenu converter="#{regraAtributoBean.converter}" id="atributoBeanAtributoRegrasSelect" value="#{requestScope['atributoBeanAtributoRegrasSelect']}">
+							<f:selectItem/>
+							<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{regraAtributoBean.all}" var="_item"/>
+						</h:selectOneMenu>
+						<h:commandLink action="#{_collection.add(requestScope['atributoBeanAtributoRegrasSelect'])}" id="atributoBeanAtributoRegrasAdd" onclick="if (document.getElementById(document.forms[0].id+':atributoBeanAtributoRegrasSelect').selectedIndex &lt; 1) { alert('Must select a Regra Atributo'); return false; }" styleClass="add-button"/>
+					</h:panelGrid>
 				</h:panelGroup>
 				<h:outputText/>
 			</h:panelGrid>
