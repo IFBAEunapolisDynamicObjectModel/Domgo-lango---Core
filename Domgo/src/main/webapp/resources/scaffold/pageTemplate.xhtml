@@ -58,13 +58,19 @@
                             <h:link outcome="/redirect/sistema/search" value="Sistema" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/redirect/usuario/search" value="Usuario" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/usuario/search" value="Usuario" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
                             <h:link outcome="/redirect/usuarioSistema/search" value="Usuario Sistema" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:commandLink value ="Logout" action="#{loginBean.logout()}" />
+                            <h:link outcome="/usuario/create" value="Criar Usuario" rendered="#{loginBean.logado eq false}"/>
+                        </li>
+                        <li>
+                            <h:link outcome="/login" value="Fazer login" rendered="#{loginBean.logado eq false}"/>
+                        </li>
+                        <li>
+                            <h:commandLink value ="Logout" action="#{loginBean.logout()}" rendered="#{loginBean.logado}"/>
                         </li>
                     </ul>
                 </h:form>
