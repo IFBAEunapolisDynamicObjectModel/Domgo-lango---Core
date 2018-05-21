@@ -7,10 +7,11 @@ package com.unity.domgo.view;
 
 import com.unity.domgo.model.Usuario;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -20,6 +21,8 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class LoginBean implements Serializable {
 
+    @Inject
+    private UsuarioBean usuarioBean;
     private String login;
     private String senha;
     private Usuario usuario;
@@ -58,12 +61,17 @@ public class LoginBean implements Serializable {
     }
 
     public String logar() {
-        if (login.equals("w") && senha.equals("1")) {
-            usuario = new Usuario();
-            logado = true;
-            return "/redirect/index.xhtml?faces-redirect=true";
+
+        for (Usuario user : usuarioBean.getAll()) {
+            if (login.equals(user.getLogin()) && senha.equals(user.getSenha())) {
+                this.logado = true;
+                this.usuario = user;
+                return "/index.xhtml?faces-redirect=true";
+
+            }
 
         }
+
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario e/ou senha invalidas", ""));
         return null;
@@ -73,7 +81,7 @@ public class LoginBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         usuario = null;
         logado = false;
-        return "/login.xhtml?faces-redirect=true";
+        return "/login/login.xhtml?faces-redirect=true";
     }
 
 }

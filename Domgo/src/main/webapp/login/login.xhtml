@@ -27,7 +27,6 @@
     <ui:define name="main">
         <h:form id="login">
             <f:validateBean disabled="true">
-
                 <h:panelGroup >
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid columnClasses="label,component,required" columns="3">
@@ -45,7 +44,7 @@
                         <h:outputText/>
                     </h:panelGrid>
                     <h:panelGroup styleClass="buttons">
-                        <h:commandLink value="Logar" action='#{loginBean.logar()}' styleClass="btn btn-primary"/>
+                        <h:commandButton value="Logar" action='#{loginBean.logar()}' styleClass="btn btn-primary"/>
                     </h:panelGroup>
                 </h:panelGroup>
 

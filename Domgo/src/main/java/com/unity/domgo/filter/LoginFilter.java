@@ -36,8 +36,8 @@ public class LoginFilter implements Filter {
         HttpServletRequest res = (HttpServletRequest) request;
         HttpServletResponse rep = (HttpServletResponse) response;
         String url = res.getRequestURL().toString();
-        if (url.contains("/redirect") && loginbean.getUsuario() == null) {
-            rep.sendRedirect(res.getServletContext().getContextPath() + "/login.xhtml");
+        if (url.contains("/login") == false && loginbean.getLogado() == false) {
+            rep.sendRedirect(res.getServletContext().getContextPath() + "/login/login.xhtml");
         } else {
             chain.doFilter(request, response);
         }

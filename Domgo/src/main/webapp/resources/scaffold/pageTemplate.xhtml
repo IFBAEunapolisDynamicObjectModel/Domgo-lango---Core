@@ -32,45 +32,45 @@
         <div class="container forgecontainer">
             <div id="navigation">
                 <h:link id="homeLink" outcome="/index.xhtml">
-                    <h:graphicImage value='#{resource["forge-logo.png"]}' alt="Forge... get hammered"  />
+                    <h:graphicImage value='#{resource["forge-logo.png"]}' alt="Forge... get hammered" />
                 </h:link>
                 <h:form>
                     <ul>
                         <li>
-                            <h:link outcome="/redirect/atributo/search" value="Atributo" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/atributo/search" value="Atributo" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/redirect/entidade/search" value="Entidade" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/entidade/search" value="Entidade" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/redirect/instanciaAtributo/search" value="Instancia Atributo" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/instanciaAtributo/search" value="Instancia Atributo" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/redirect/instanciaEntidade/search" value="Instancia Entidade" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/instanciaEntidade/search" value="Instancia Entidade" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/redirect/instanciaSistema/search" value="Instancia Sistema" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/instanciaSistema/search" value="Instancia Sistema" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/redirect/regraAtributo/search" value="Regra Atributo" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/regraAtributo/search" value="Regra Atributo" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/redirect/sistema/search" value="Sistema" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/sistema/search" value="Sistema" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
                             <h:link outcome="/usuario/search" value="Usuario" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/redirect/usuarioSistema/search" value="Usuario Sistema" rendered="#{loginBean.logado}"/>
+                            <h:link outcome="/usuarioSistema/search" value="Usuario Sistema" rendered="#{loginBean.logado}"/>
                         </li>
                         <li>
-                            <h:link outcome="/usuario/create" value="Criar Usuario" rendered="#{loginBean.logado eq false}"/>
+                            <h:link outcome="/login/usuario/create" value="Cadastrar Usuario"  rendered="#{loginBean.logado eq false}"/>
                         </li>
                         <li>
-                            <h:link outcome="/login" value="Fazer login" rendered="#{loginBean.logado eq false}"/>
+                            <h:link outcome="/login/login" value="Logar"  rendered="#{loginBean.logado eq false}"/>
                         </li>
                         <li>
-                            <h:commandLink value ="Logout" action="#{loginBean.logout()}" rendered="#{loginBean.logado}"/>
+                            <h:commandLink value="Logout" action="#{loginBean.logout()}" rendered="#{loginBean.logado}"/>
                         </li>
                     </ul>
                 </h:form>
