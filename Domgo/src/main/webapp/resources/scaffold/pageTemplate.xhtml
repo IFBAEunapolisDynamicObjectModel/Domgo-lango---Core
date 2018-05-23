@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <title>#{empty pageTitle ? 'Page Title' : pageTitle}</title>
@@ -34,46 +35,46 @@
                 <h:link id="homeLink" outcome="/index.xhtml">
                     <h:graphicImage value='#{resource["forge-logo.png"]}' alt="Forge... get hammered" />
                 </h:link>
-                <h:form>
-                    <ul>
-                        <li>
-                            <h:link outcome="/atributo/search" value="Atributo" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/entidade/search" value="Entidade" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/instanciaAtributo/search" value="Instancia Atributo" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/instanciaEntidade/search" value="Instancia Entidade" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/instanciaSistema/search" value="Instancia Sistema" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/regraAtributo/search" value="Regra Atributo" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/sistema/search" value="Sistema" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/usuario/search" value="Usuario" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/usuarioSistema/search" value="Usuario Sistema" rendered="#{loginBean.logado}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/login/usuario/create" value="Cadastrar Usuario"  rendered="#{loginBean.logado eq false}"/>
-                        </li>
-                        <li>
-                            <h:link outcome="/login/login" value="Logar"  rendered="#{loginBean.logado eq false}"/>
-                        </li>
-                        <li>
-                            <h:commandLink value="Logout" action="#{loginBean.logout()}" rendered="#{loginBean.logado}"/>
-                        </li>
-                    </ul>
-                </h:form>
+
+                <ul>
+                    <li>
+                        <h:link outcome="/atributo/search" value="Atributo" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/entidade/search" value="Entidade" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/instanciaAtributo/search" value="Instancia Atributo" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/instanciaEntidade/search" value="Instancia Entidade" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/instanciaSistema/search" value="Instancia Sistema" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/regraAtributo/search" value="Regra Atributo" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/sistema/search" value="Sistema" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/usuario/search" value="Usuario" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/usuarioSistema/search" value="Usuario Sistema" rendered="#{loginBean.logado}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/login/usuario/create" value="Cadastrar Usuario"  rendered="#{loginBean.logado eq false}"/>
+                    </li>
+                    <li>
+                        <h:link outcome="/login/login" value="Logar"  rendered="#{loginBean.logado eq false}"/>
+                    </li>
+                    <li>
+                        <p:commandLink value="Logout" action="#{loginBean.logout()}" rendered="#{loginBean.logado}"/>
+                    </li>
+                </ul>
+
             </div>
 
             <div id="content">
