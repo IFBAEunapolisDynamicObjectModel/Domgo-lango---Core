@@ -40,19 +40,25 @@
 
                 <h:outputLabel for="usuarioBeanUsuarioNome" value="Nome:"/>
                 <h:panelGroup>
-                    <h:inputText id="usuarioBeanUsuarioNome" required="true" value="#{usuarioBean.usuario.nome}"/>
+                    <f:validateLength minimum="5" maximum="15">
+                        <h:inputText id="usuarioBeanUsuarioNome" required="true" value="#{usuarioBean.usuario.nome}" />
+                    </f:validateLength>
                     <h:message for="usuarioBeanUsuarioNome" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText value="*"/>
                 <h:outputLabel for="usuarioBeanUsuarioLogin" value="Login:"/>
                 <h:panelGroup>
-                    <h:inputText id="usuarioBeanUsuarioLogin" required="true" value="#{usuarioBean.usuario.login}"/>
+                    <f:validateLength minimum="5" maximum="15">
+                        <h:inputText id="usuarioBeanUsuarioLogin" required="true" value="#{usuarioBean.usuario.login}"/>
+                    </f:validateLength>
                     <h:message for="usuarioBeanUsuarioLogin" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText value="*"/>
                 <h:outputLabel for="usuarioBeanUsuarioSenha" value="Senha:"/>
                 <h:panelGroup>
-                    <h:inputSecret id="usuarioBeanUsuarioSenha" required="true" value="#{usuarioBean.usuario.senha}"/>
+                    <f:validateLength minimum="5" maximum="15">
+                        <h:inputSecret id="usuarioBeanUsuarioSenha" required="true" value="#{usuarioBean.usuario.senha}"/>
+                    </f:validateLength>
                     <h:message for="usuarioBeanUsuarioSenha" styleClass="error"/>
                 </h:panelGroup>
                 <h:outputText value="*"/>
