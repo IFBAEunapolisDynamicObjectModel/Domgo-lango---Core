@@ -8,45 +8,48 @@
 	template="/resources/scaffold/pageTemplate.xhtml">
 
 	<f:metadata>
-		<f:viewParam name="id" value='#{entidadeBean.id}'/>
-		<f:event type="preRenderView" listener='#{entidadeBean.retrieve}'/>
+		<f:viewParam name="id" value='#{atributoBean.id}'/>
+		<f:event type="preRenderView" listener='#{atributoBean.retrieve}'/>
 	</f:metadata>
 
-	<ui:param name="pageTitle" value="View Entidade"/>
+	<ui:param name="pageTitle" value="View Atributo"/>
 
 	<ui:define name="header">
-		Entidade
+		Atributo
 	</ui:define>
 
 	<ui:define name="subheader">
-		View existing Entidade
+		View existing Atributo
 	</ui:define>
 
 	<ui:define name="footer"/>
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="entidadeBeanEntidadeNome" value="Nome:"/>
-			<h:outputText id="entidadeBeanEntidadeNome" value="#{entidadeBean.entidade.nome}"/>
+			<h:outputLabel for="atributoBeanAtributoNome" value="Nome:"/>
+			<h:outputText id="atributoBeanAtributoNome" value="#{atributoBean.atributo.nome}"/>
 			<h:outputText/>
-			<h:outputLabel for="entidadeBeanEntidadeAtributos" value="Atributos:"/>
-			<h:dataTable id="entidadeBeanEntidadeAtributos" styleClass="data-table" value="#{forgeview:asList(entidadeBean.entidade.atributos)}" var="_item">
+			<h:outputLabel for="atributoBeanAtributoTipo" value="Tipo:"/>
+			<h:outputText id="atributoBeanAtributoTipo" value="#{atributoBean.atributo.tipo}"/>
+			<h:outputText/>
+			<h:outputLabel for="atributoBeanAtributoRegras" value="Regras:"/>
+			<h:dataTable id="atributoBeanAtributoRegras" styleClass="data-table" value="#{forgeview:asList(atributoBean.atributo.regras)}" var="_item">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Nome"/>
 					</f:facet>
-					<h:link outcome="/atributo/view">
+					<h:link outcome="/restrito/regraAtributo/view">
 						<f:param name="id" value="#{_item.id}"/>
 						<h:outputText id="_itemNome" value="#{_item.nome}"/>
 					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Tipo"/>
+						<h:outputText value="Descricao"/>
 					</f:facet>
-					<h:link outcome="/atributo/view">
+					<h:link outcome="/restrito/regraAtributo/view">
 						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemTipo" value="#{_item.tipo}"/>
+						<h:outputText id="_itemDescricao" value="#{_item.descricao}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

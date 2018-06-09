@@ -34,7 +34,7 @@
 
     <ui:define name="main">
         <h:form id="create">
-            <h:messages globalOnly="true" styleClass="error"/>
+
             <p:messages autoUpdate="true"/>
             <h:panelGrid columnClasses="label,component,required" columns="3">
 
@@ -55,6 +55,7 @@
                     <h:inputSecret id="usuarioBeanUsuarioSenha" required="true" value="#{usuarioBean.usuario.senha}"/>
                     <h:message for="usuarioBeanUsuarioSenha" styleClass="error"/>
                 </h:panelGroup>
+                <h:outputText value="*"/>
 
             </h:panelGrid>
 

@@ -66,7 +66,7 @@ public class LoginBean implements Serializable {
             if (login.equals(user.getLogin()) && senha.equals(user.getSenha())) {
                 this.logado = true;
                 this.usuario = user;
-                return "/index.xhtml?faces-redirect=true";
+                return "/restrito/sistema/search?faces-redirect=true";
 
             }
 
@@ -81,7 +81,7 @@ public class LoginBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         usuario = null;
         logado = false;
-        return "/login/login.xhtml?faces-redirect=true";
+        return "/faces/index.xhtml?faces-redirect=true";
     }
 
 }

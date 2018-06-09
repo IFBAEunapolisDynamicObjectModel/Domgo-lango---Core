@@ -8,51 +8,48 @@
 	template="/resources/scaffold/pageTemplate.xhtml">
 
 	<f:metadata>
-		<f:viewParam name="id" value='#{atributoBean.id}'/>
-		<f:event type="preRenderView" listener='#{atributoBean.retrieve}'/>
+		<f:viewParam name="id" value='#{usuarioSistemaBean.id}'/>
+		<f:event type="preRenderView" listener='#{usuarioSistemaBean.retrieve}'/>
 	</f:metadata>
 
-	<ui:param name="pageTitle" value="View Atributo"/>
+	<ui:param name="pageTitle" value="View Usuario Sistema"/>
 
 	<ui:define name="header">
-		Atributo
+		Usuario Sistema
 	</ui:define>
 
 	<ui:define name="subheader">
-		View existing Atributo
+		View existing Usuario Sistema
 	</ui:define>
 
 	<ui:define name="footer"/>
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="atributoBeanAtributoNome" value="Nome:"/>
-			<h:outputText id="atributoBeanAtributoNome" value="#{atributoBean.atributo.nome}"/>
-			<h:outputText/>
-			<h:outputLabel for="atributoBeanAtributoTipo" value="Tipo:"/>
-			<h:outputText id="atributoBeanAtributoTipo" value="#{atributoBean.atributo.tipo}"/>
-			<h:outputText/>
-			<h:outputLabel for="atributoBeanAtributoRegras" value="Regras:"/>
-			<h:dataTable id="atributoBeanAtributoRegras" styleClass="data-table" value="#{forgeview:asList(atributoBean.atributo.regras)}" var="_item">
+			<h:outputLabel for="usuarioSistemaBeanUsuarioSistemaAtributos" value="Atributos:"/>
+			<h:dataTable id="usuarioSistemaBeanUsuarioSistemaAtributos" styleClass="data-table" value="#{forgeview:asList(usuarioSistemaBean.usuarioSistema.atributos)}" var="_item">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Nome"/>
 					</f:facet>
-					<h:link outcome="/regraAtributo/view">
+					<h:link outcome="/restrito/atributo/view">
 						<f:param name="id" value="#{_item.id}"/>
 						<h:outputText id="_itemNome" value="#{_item.nome}"/>
 					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Descricao"/>
+						<h:outputText value="Tipo"/>
 					</f:facet>
-					<h:link outcome="/regraAtributo/view">
+					<h:link outcome="/restrito/atributo/view">
 						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemDescricao" value="#{_item.descricao}"/>
+						<h:outputText id="_itemTipo" value="#{_item.tipo}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="usuarioSistemaBeanUsuarioSistemaNivelDeAcesso" value="Nivel De Acesso:"/>
+			<h:outputText id="usuarioSistemaBeanUsuarioSistemaNivelDeAcesso" value="#{usuarioSistemaBean.usuarioSistema.nivelDeAcesso}"/>
 			<h:outputText/>
 		</h:panelGrid>
 

@@ -110,8 +110,8 @@ public class UsuarioBean implements Serializable {
         try {
             if (this.id == null) {
                 this.entityManager.persist(this.usuario);
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario cadastrado", ""));
+                FacesContext.getCurrentInstance().addMessage(
+                        null, new FacesMessage("Cadastro realizado com sucesso!"));
                 return "search?faces-redirect=true";
 
             } else {
