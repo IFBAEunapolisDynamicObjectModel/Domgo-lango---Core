@@ -1,4 +1,4 @@
-# DOMGo LANGo Core
-Dynamic Object Model Go by Lango
+# DOM Go! Core
+Dynamic Object Model by DOM Go!
 
-Faciliting your job!
+Building Dreams!
