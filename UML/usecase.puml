@@ -1,0 +1,23 @@
+@startuml
+
+actor admin
+actor usuario
+
+usecase uc1 as (manter usuario)
+usecase uc2 as (manter sistema)
+usecase uc3 as (manter entidade)
+usecase uc4 as (manter atributo)
+usecase uc5 as (acessar sistema)
+usecase uc6 as (manter registro)
+
+admin .u.> usuario
+admin -u-> uc1
+admin -d-> uc2
+admin -r-> uc5
+uc2 ..> uc3: <<include>>
+uc3 .> uc4: <<include>>
+uc5 .> uc6: <<include>>
+
+usuario --> uc5
+
+@enduml
