@@ -30,6 +30,12 @@ public class UsuarioSistema implements Serializable {
 	@Enumerated
 	private NivelDeAcesso nivelDeAcesso;
 
+	@Column(nullable = false)
+	private String login;
+
+	@Column(updatable = false)
+	private String senha;
+
 	public Long getId() {
 		return this.id;
 	}
@@ -85,5 +91,31 @@ public class UsuarioSistema implements Serializable {
 
 	public void setNivelDeAcesso(NivelDeAcesso nivelDeAcesso) {
 		this.nivelDeAcesso = nivelDeAcesso;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	@Override
+	public String toString() {
+		String result = getClass().getSimpleName() + " ";
+		if (login != null && !login.trim().isEmpty())
+			result += "login: " + login;
+		if (senha != null && !senha.trim().isEmpty())
+			result += ", senha: " + senha;
+		return result;
 	}
 }

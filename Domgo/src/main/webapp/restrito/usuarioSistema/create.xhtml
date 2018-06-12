@@ -18,6 +18,12 @@
 	<ui:define name="header">
 		Usuario Sistema
 	</ui:define>
+        <ui:define name="menu">
+        <ui:include src="/menus/usuariologado.xhtml"/>
+    </ui:define>
+        <ui:define name="botao">
+        <ui:include src="/menus/logout.xhtml"/>
+    </ui:define>
 
 	<ui:define name="subheader">
 		<c:choose>
@@ -31,12 +37,6 @@
 	</ui:define>
 
 	<ui:define name="footer"/>
-<ui:define name="menu">
-        <ui:include src="/menus/usuariologado.xhtml"/>
-    </ui:define>
-         <ui:define name="botao">
-        <ui:include src="/menus/logout.xhtml"/>
-    </ui:define>
 
 	<ui:define name="main">
 		<h:form id="create">
@@ -87,6 +87,18 @@
 						<f:selectItem itemValue="ADMIN"/>
 					</h:selectOneMenu>
 					<h:message for="usuarioSistemaBeanUsuarioSistemaNivelDeAcesso" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="usuarioSistemaBeanUsuarioSistemaLogin" value="Login:"/>
+				<h:panelGroup>
+					<h:inputText id="usuarioSistemaBeanUsuarioSistemaLogin" required="true" value="#{usuarioSistemaBean.usuarioSistema.login}"/>
+					<h:message for="usuarioSistemaBeanUsuarioSistemaLogin" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="usuarioSistemaBeanUsuarioSistemaSenha" value="Senha:"/>
+				<h:panelGroup>
+					<h:inputText id="usuarioSistemaBeanUsuarioSistemaSenha" value="#{usuarioSistemaBean.usuarioSistema.senha}"/>
+					<h:message for="usuarioSistemaBeanUsuarioSistemaSenha" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 			</h:panelGrid>

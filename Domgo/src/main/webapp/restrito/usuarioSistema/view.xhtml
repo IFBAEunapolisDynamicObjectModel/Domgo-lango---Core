@@ -23,10 +23,10 @@
 	</ui:define>
 
 	<ui:define name="footer"/>
-<ui:define name="menu">
+        <ui:define name="menu">
         <ui:include src="/menus/usuariologado.xhtml"/>
     </ui:define>
-         <ui:define name="botao">
+        <ui:define name="botao">
         <ui:include src="/menus/logout.xhtml"/>
     </ui:define>
 
@@ -56,6 +56,12 @@
 			<h:outputText/>
 			<h:outputLabel for="usuarioSistemaBeanUsuarioSistemaNivelDeAcesso" value="Nivel De Acesso:"/>
 			<h:outputText id="usuarioSistemaBeanUsuarioSistemaNivelDeAcesso" value="#{usuarioSistemaBean.usuarioSistema.nivelDeAcesso}"/>
+			<h:outputText/>
+			<h:outputLabel for="usuarioSistemaBeanUsuarioSistemaLogin" value="Login:"/>
+			<h:outputText id="usuarioSistemaBeanUsuarioSistemaLogin" value="#{usuarioSistemaBean.usuarioSistema.login}"/>
+			<h:outputText/>
+			<h:outputLabel for="usuarioSistemaBeanUsuarioSistemaSenha" value="Senha:"/>
+			<h:outputText id="usuarioSistemaBeanUsuarioSistemaSenha" value="#{usuarioSistemaBean.usuarioSistema.senha}"/>
 			<h:outputText/>
 		</h:panelGrid>
 

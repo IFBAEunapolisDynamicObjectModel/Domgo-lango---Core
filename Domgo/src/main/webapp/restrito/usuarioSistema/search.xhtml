@@ -22,10 +22,10 @@
 	</ui:define>
 
 	<ui:define name="footer"/>
-<ui:define name="menu">
+        <ui:define name="menu">
         <ui:include src="/menus/usuariologado.xhtml"/>
     </ui:define>
-         <ui:define name="botao">
+        <ui:define name="botao">
         <ui:include src="/menus/logout.xhtml"/>
     </ui:define>
 
@@ -46,6 +46,18 @@
 							<h:message for="usuarioSistemaBeanExampleNivelDeAcesso" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
+						<h:outputLabel for="usuarioSistemaBeanExampleLogin" value="Login:"/>
+						<h:panelGroup>
+							<h:inputText id="usuarioSistemaBeanExampleLogin" value="#{usuarioSistemaBean.example.login}"/>
+							<h:message for="usuarioSistemaBeanExampleLogin" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="usuarioSistemaBeanExampleSenha" value="Senha:"/>
+						<h:panelGroup>
+							<h:inputText id="usuarioSistemaBeanExampleSenha" value="#{usuarioSistemaBean.example.senha}"/>
+							<h:message for="usuarioSistemaBeanExampleSenha" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
 					</h:panelGrid>
 					<h:panelGroup styleClass="buttons">
 						<h:commandLink value="Search" action='#{usuarioSistemaBean.search}' styleClass="btn btn-primary"/>
@@ -57,11 +69,11 @@
 			<h:dataTable id="usuarioSistemaBeanPageItems" styleClass="data-table" value="#{usuarioSistemaBean.pageItems}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Nivel De Acesso"/>
+						<h:outputText value="Login"/>
 					</f:facet>
 					<h:link outcome="/restrito/usuarioSistema/view">
 						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemNivelDeAcesso" value="#{_item.nivelDeAcesso}"/>
+						<h:outputText id="_itemLogin" value="#{_item.login}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

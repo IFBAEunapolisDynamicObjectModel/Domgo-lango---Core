@@ -214,6 +214,18 @@ public class UsuarioSistemaBean implements Serializable {
 			predicatesList.add(builder.equal(root.get("nivelDeAcesso"),
 					nivelDeAcesso));
 		}
+		String login = this.example.getLogin();
+		if (login != null && !"".equals(login)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("login")),
+					'%' + login.toLowerCase() + '%'));
+		}
+		String senha = this.example.getSenha();
+		if (senha != null && !"".equals(senha)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("senha")),
+					'%' + senha.toLowerCase() + '%'));
+		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
