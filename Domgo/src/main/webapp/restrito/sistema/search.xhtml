@@ -1,64 +1,79 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/resources/scaffold/pageTemplate.xhtml">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/scaffold/pageTemplate.xhtml">
 
-	<f:metadata>
-		<f:viewParam name="page" value='#{sistemaBean.page}'/>
-		<f:event type="preRenderView" listener='#{sistemaBean.paginate}'/>
-	</f:metadata>
+    <f:metadata>
+        <f:viewParam name="page" value='#{sistemaBean.page}'/>
+        <f:event type="preRenderView" listener='#{sistemaBean.paginate}'/>
+    </f:metadata>
 
-	<ui:param name="pageTitle" value="Search Sistema entities"/>
+    <ui:param name="pageTitle" value="Search Sistema entities"/>
 
-	<ui:define name="header">
-		Sistema
-	</ui:define>
+    <ui:define name="header">
+        Sistema
+    </ui:define>
 
-	<ui:define name="subheader">
-		Search Sistema entities
-	</ui:define>
+    <ui:define name="subheader">
+        Search Sistema entities
+    </ui:define>
 
-	<ui:define name="footer"/>
+    <ui:define name="footer"/>
+    <ui:define name="menu">
+        <ui:include src="/menus/usuariologado.xhtml"/>
+    </ui:define>
 
-	<ui:define name="main">
-		<h:form id="search">
-			<f:validateBean disabled="true">
-				<h:panelGroup styleClass="search">
+    <ui:define name="main">
+        <h:form id="search">
+            <f:validateBean disabled="true">
+                <h:panelGroup styleClass="search">
 
-					<h:panelGrid columnClasses="label,component,required" columns="3">
-						<h:outputLabel for="sistemaBeanExampleNome" value="Nome:"/>
-						<h:panelGroup>
-							<h:inputText id="sistemaBeanExampleNome" value="#{sistemaBean.example.nome}"/>
-							<h:message for="sistemaBeanExampleNome" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
-					</h:panelGrid>
-					<h:panelGroup styleClass="buttons">
-						<h:commandLink value="Search" action='#{sistemaBean.search}' styleClass="btn btn-primary"/>
-						<h:commandLink value="Create New" action='#{sistemaBean.create}' styleClass="btn btn-primary"/>
-					</h:panelGroup>
-				</h:panelGroup>
-			</f:validateBean>
-			
-			<h:dataTable id="sistemaBeanPageItems" styleClass="data-table" value="#{sistemaBean.pageItems}" var="_item">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Nome"/>
-					</f:facet>
-					<h:link outcome="/restrito/sistema/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="_itemNome" value="#{_item.nome}"/>
-					</h:link>
-				</h:column>
-			</h:dataTable>
-			<ui:include src="/resources/scaffold/paginator.xhtml">
-				<ui:param name="paginatorBean" value='#{sistemaBean}'/>
-			</ui:include>
-		</h:form>
-			
-	</ui:define>
+                    <h:panelGrid columnClasses="label,component,required" columns="3">
+                        <h:outputLabel for="sistemaBeanExampleNome" value="Nome:"/>
+                        <h:panelGroup>
+                            <h:inputText id="sistemaBeanExampleNome" value="#{sistemaBean.example.nome}"/>
+                            <h:message for="sistemaBeanExampleNome" styleClass="error"/>
+                        </h:panelGroup>
+                        <h:outputText/>
+                    </h:panelGrid>
+                    <h:panelGroup styleClass="buttons">
+                        <h:commandLink value="Search" action='#{sistemaBean.search}' styleClass="btn btn-primary"/>
+                        <h:commandLink value="Create New" action='#{sistemaBean.create}' styleClass="btn btn-primary"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </f:validateBean>
+
+            <h:dataTable id="sistemaBeanPageItems" styleClass="data-table" value="#{sistemaBean.pageItems}" var="_item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nome"/>
+                    </f:facet>
+                    <ul>
+                        <li>
+                            <h:link outcome="/restrito/sistema/view">
+                                <f:param name="id" value="#{_item.id}"/>
+                                <h:outputText id="_itemNome" value="#{_item.nome}"/>
+                            </h:link>
+
+                            <h:link outcome="/sistemaCriado/index">
+                                <f:param name="id" value="#{_item.id}"/>
+                                <font style='font-weight:bold'>
+                                    <h:outputText id="teste" value="Acessar sistema: http://localhost:8080/Domgo/faces/sistemaCriado/index.xhtml?id=#{_item.id}"/>
+                                </font>
+                            </h:link>
+
+                        </li>
+                    </ul>
+                </h:column>
+            </h:dataTable>
+            <ui:include src="/resources/scaffold/paginator.xhtml">
+                <ui:param name="paginatorBean" value='#{sistemaBean}'/>
+            </ui:include>
+        </h:form>
+
+    </ui:define>
 
 </ui:composition>

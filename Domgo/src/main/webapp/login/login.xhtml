@@ -54,8 +54,11 @@
             <ui:include src="/resources/scaffold/paginator.xhtml">
                 <ui:param name="paginatorBean" value='#{usuarioBean}'/>
             </ui:include>
+
         </h:form>
 
     </ui:define>
-
+    <ui:define name="menu">
+        <ui:include src="/menus/login.xhtml"/>
+    </ui:define>
 </ui:composition>

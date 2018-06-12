@@ -2,12 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/resources/scaffold/pageTemplate.xhtml">
+                template="/resources/scaffold/pageTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <ui:param name="pageTitle" value="Bem-Vindo ao Domgo" />
+    <ui:param name="pageTitle" value="Welcome to Forge" />
 
     <ui:define name="header">
         Bem-Vindo Ao DomGo.
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/menus/menusistema.xhtml"/>
     </ui:define>
 
     <ui:define name="main">
@@ -20,8 +24,6 @@
             </h3>
         </p>
     </ui:define>
-    <ui:define name="menu">
-        <ui:include src="/menus/login.xhtml"/>
-    </ui:define>
+
 
 </ui:composition>

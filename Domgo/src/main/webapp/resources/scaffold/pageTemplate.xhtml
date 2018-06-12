@@ -31,30 +31,9 @@
 
 
                 <ul>
-                    <li>
-                        <h:link outcome="/restrito/atributo/search" value="Atributo" rendered="#{loginBean.logado}"/>
-                    </li>
-                    <li>
-                        <h:link outcome="/restrito/entidade/search" value="Entidade" rendered="#{loginBean.logado}"/>
-                    </li>
 
-                    <li>
-                        <h:link outcome="/restrito/regraAtributo/search" value="Regra Atributo" rendered="#{loginBean.logado}"/>
-                    </li>
-                    <li>
-                        <h:link outcome="/restrito/sistema/search" value="Sistema" rendered="#{loginBean.logado}"/>
-                    </li>
 
-                    <li>
-                        <h:link outcome="/restrito/usuarioSistema/search" value="Usuario Sistema" rendered="#{loginBean.logado}"/>
-                    </li>
-                    <li>
-                        <h:link outcome="/login/usuario/create" value="Cadastrar Usuario"  rendered="#{loginBean.logado eq false}"/>
-                    </li>
-                    <li>
-                        <h:link outcome="/login/login" value="Logar"  rendered="#{loginBean.logado eq false}"/>
-                    </li>
-
+                    <ui:insert name="menu" />
 
                 </ul>
 
